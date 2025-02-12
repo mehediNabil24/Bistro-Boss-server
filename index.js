@@ -139,11 +139,20 @@ app.patch('/users/admin/:id',verifyToken,verifyAdmin, async (req,res)=>{
         res.send(result)
     })
 
+    app.post('/menu', verifyToken,verifyAdmin,async(req,res)=>{
+      const item =req.body;
+      const result = await menuCollection.insertOne(item);
+      res.send(result);
+     
+    })
+
     // review api
     app.get('/reviews', async(req,res)=>{
         const result = await reviewCollection.find().toArray();
         res.send(result)
     })
+
+    
     // cart collection
 
     app.get('/carts', async(req,res)=>{
